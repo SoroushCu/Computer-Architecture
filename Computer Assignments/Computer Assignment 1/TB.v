@@ -1,0 +1,55 @@
+`timescale 1ns/1ns
+module TB(); 
+    reg CLK = 1'b0 , Start = 1'b0;
+    reg [9:0]DIVIDEND;
+    reg [4:0]DIVISOR;
+    wire Finish;
+    wire [4:0]Rem;
+    wire [4:0]Quo;
+    wire DIVBYZERO;
+    wire OV;
+    DividerTopLevel UUT(DIVIDEND,DIVISOR,CLK,Start,Quo,Rem,Finish,OV,DIVBYZERO);
+    always #20 CLK = ~CLK;
+    initial begin
+        DIVIDEND  = 10'b0001001011; 
+        DIVISOR = 5'b00000;
+	#100 Start = 1'b1;
+        #100 Start = 1'b0;
+        #2500;
+        DIVIDEND  = 10'b0010111100;
+        DIVISOR = 5'b01110;
+	#100 Start = 1'b1;
+        #100 Start = 1'b0;
+        #2500;
+        DIVIDEND  = 10'b0011110000;
+        DIVISOR = 5'b01010;
+	#100 Start = 1'b1;
+        #100 Start = 1'b0;
+        #2500;
+        DIVIDEND = 10'b0010011000;
+        DIVISOR = 5'b00101;
+	#100 Start = 1'b1;
+        #100 Start = 1'b0;
+        #2500;
+        DIVIDEND  = 10'b0011000111;
+        DIVISOR = 5'b10011;
+	#100 Start = 1'b1;
+        #100 Start = 1'b0;
+        #2500;
+        DIVIDEND  = 10'b0001000111; 
+        DIVISOR = 5'b00001;
+	#100 Start = 1'b1;
+        #100 Start = 1'b0;
+        #2500;
+        DIVIDEND  = 10'b0000011111;
+        DIVISOR = 5'b00101;
+	#100 Start = 1'b1;
+        #100 Start = 1'b0;
+        #2500;
+        DIVIDEND  = 10'b0000000111;
+        DIVISOR = 5'b00010;
+	#100 Start = 1'b1;
+        #100 Start = 1'b0;
+        #2500 $stop;
+    end
+endmodule
